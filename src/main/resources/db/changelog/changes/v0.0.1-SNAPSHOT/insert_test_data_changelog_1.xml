@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="insert-managers-data" author="p.gorulya">
+        <insert tableName="managers">
+            <column name="id">aaaabbbb-0000-1111-2222-333344445555</column>
+            <column name="first_name">Andreas</column>
+            <column name="last_name">Seipel</column>
+            <column name="status">1</column>
+            <column name="created_at">2023-03-13 10:00:00</column>
+            <column name="updated_at">2023-03-13 10:00:00</column>
+        </insert>
+        <insert tableName="managers">
+            <column name="id">aaaabbbb-0000-1111-2222-333344445556</column>
+            <column name="first_name">Magnus</column>
+            <column name="last_name">Neizel</column>
+            <column name="status">0</column>
+            <column name="created_at">2023-03-13 11:00:00</column>
+            <column name="updated_at">2023-03-13 11:00:00</column>
+        </insert>
+    </changeSet>
+
+    <changeSet id="insert-client-data" author="p.gorulya">
+        <insert tableName="clients">
+            <column name="id">bbbbaaaa-1111-2222-3333-444455556666</column>
+            <column name="manager_id">aaaabbbb-0000-1111-2222-333344445555</column>
+            <column name="status">1</column>
+            <column name="tax_code">987456321</column>
+            <column name="first_name">Maik</column>
+            <column name="last_name">Arnd</column>
+            <column name="email">maik.arnd@google.com</column>
+            <column name="address">Kasseler Str.19, Egalstadt Germany</column>
+            <column name="phone">+491557298777</column>
+            <column name="created_at">2023-03-13 13:00:00</column>
+            <column name="updated_at">2023-03-13 13:00:00</column>
+        </insert>
+    </changeSet>
+
+    <changeSet id="insert-account-data" author="p.gorulya">
+        <insert tableName="accounts">
+            <column name="id">DE54-5009-0005-7823-8146</column>
+            <column name="client_id">bbbbaaaa-1111-2222-3333-444455556666</column>
+            <column name="name">Checking Account</column>
+            <column name="type">1</column>
+            <column name="status">1</column>
+            <column name="balance">2500.00</column>
+            <column name="currency_code">1</column>
+            <column name="created_at">2023-03-13 15:00:00</column>
+            <column name="updated_at">2023-03-13 15:00:00</column>
+
+        </insert>
+    </changeSet>
+
+    <changeSet id="insert-product-data" author="p.gorulya">
+        <insert tableName="products">
+            <column name="id">ccccdddd-eeee-7878-8989-123456789123</column>
+            <column name="manager_id">aaaabbbb-0000-1111-2222-333344445555</column>
+            <column name="name">Credit</column>
+            <column name="status">1</column>
+            <column name="currency_code">1</column>
+            <column name="interest_rate">1.350</column>
+            <column name="limit">20000</column>
+            <column name="created_at">2023-03-15 16:00:00</column>
+            <column name="updated_at">2023-03-15 16:00:00</column>
+
+        </insert>
+    </changeSet>
+
+    <changeSet id="insert-agreement-data" author="p.gorulya">
+        <insert tableName="agreements">
+            <column name="id">AGRE-0000-0000-0000-0001</column>
+            <column name="account_id">DE54-5009-0005-7823-8146</column>
+            <column name="product_id">ccccdddd-eeee-7878-8989-123456789123</column>
+            <column name="interest_rate">1.550</column>
+            <column name="created_at">2023-03-20 12:00:00</column>
+            <column name="updated_at">2023-03-20 12:00:00</column>
+
+        </insert>
+    </changeSet>
+
+    <changeSet author="p.gorulya" id="insert-transaction-data">
+        <insert tableName="transactions">
+            <column name="id">TRAN-0000-0000-0000-0000-0059</column>
+            <column name="debit_account_id">DE54-5009-0005-7823-8146</column>
+            <column name="credit_account_id">DE54-5009-0005-7823-8146</column>
+            <column name="type">0</column>
+            <column name="amount">200.0000</column>
+            <column name="description">Credit Transaction</column>
+            <column name="created_at">2022-01-01 12:00:00</column>
+        </insert>
+    </changeSet>
+
+
+</databaseChangeLog>
