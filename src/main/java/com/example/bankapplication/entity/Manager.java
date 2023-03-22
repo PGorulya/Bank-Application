@@ -2,10 +2,7 @@ package com.example.bankapplication.entity;
 
 import com.example.bankapplication.entity.enums.ManagerStatus;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.sql.Timestamp;
 import java.util.Set;
@@ -17,6 +14,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @Setter
 @Getter
+@ToString
 public class Manager {
 
     @Id

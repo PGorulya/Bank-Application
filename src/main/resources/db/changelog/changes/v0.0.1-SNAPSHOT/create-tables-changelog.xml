@@ -12,7 +12,7 @@
             </not>
         </preConditions>
         <createTable tableName="managers">
-            <column name="id" type="uuid">
+            <column name="id" type="BINARY(36)">
                 <constraints primaryKey="true"/>
             </column>
             <column name="first_name" type="varchar(50)"/>
@@ -34,10 +34,10 @@
             </not>
         </preConditions>
         <createTable tableName="clients">
-            <column name="id" type="uuid">
+            <column name="id" type="BINARY(36)">
                 <constraints primaryKey="true"/>
             </column>
-            <column name="manager_id" type="uuid">
+            <column name="manager_id" type="BINARY(36)">
                 <constraints nullable="true"/>
             </column>
             <column name="status" type="tinyint(1)"/>
@@ -62,10 +62,10 @@
             </not>
         </preConditions>
         <createTable tableName="accounts">
-            <column name="id" type="uuid">
+            <column name="id" type="BINARY(36)">
                 <constraints primaryKey="true"/>
             </column>
-            <column name="client_id" type="uuid">
+            <column name="client_id" type="BINARY(36)">
                 <constraints foreignKeyName="fk_client_account" referencedTableName="clients"
                              referencedColumnNames="id"/>
             </column>
@@ -87,10 +87,10 @@
             </not>
         </preConditions>
         <createTable tableName="products">
-            <column name="id" type="uuid">
+            <column name="id" type="BINARY(36)">
                 <constraints primaryKey="true"/>
             </column>
-            <column name="manager_id" type="uuid">
+            <column name="manager_id" type="BINARY(36)">
                 <constraints foreignKeyName="true" referencedTableName="managers" referencedColumnNames="id"/>
             </column>
             <column name="name" type="varchar(70)"/>
@@ -112,14 +112,14 @@
             </not>
         </preConditions>
         <createTable tableName="agreements">
-            <column name="id" type="uuid">
+            <column name="id" type="BINARY(36)">
                 <constraints primaryKey="true"/>
             </column>
-            <column name="account_id" type="uuid">
+            <column name="account_id" type="BINARY(36)">
                 <constraints foreignKeyName="fk_agreement_account_id" referencedTableName="accounts"
                              referencedColumnNames="id"/>
             </column>
-            <column name="product_id" type="uuid">
+            <column name="product_id" type="BINARY(36)">
                 <constraints foreignKeyName="fk_agreement_product_id" referencedTableName="products"
                              referencedColumnNames="id"/>
             </column>
@@ -141,14 +141,14 @@
             </not>
         </preConditions>
         <createTable tableName="transactions">
-            <column name="id" type="uuid">
+            <column name="id" type="BINARY(36)">
                 <constraints primaryKey="true"/>
             </column>
-            <column name="debit_account_id" type="uuid">
+            <column name="debit_account_id" type="BINARY(36)">
                 <constraints foreignKeyName="fk_debit_account_id" referencedTableName="accounts"
                              referencedColumnNames="id"/>
             </column>
-            <column name="credit_account_id" type="uuid">
+            <column name="credit_account_id" type="BINARY(36)">
                 <constraints foreignKeyName="fk_credit_account_id" referencedTableName="accounts"
                              referencedColumnNames="id"/>
             </column>
