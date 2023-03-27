@@ -6,9 +6,16 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.math.BigInteger;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
-public interface ManagerRepository extends JpaRepository<Manager, UUID> {
+public interface ManagerRepository extends JpaRepository<Manager, ManagerStatus> {
 
-    List<Manager> getAllByStatus(ManagerStatus status);
+
+    //   List<Manager> getAllByStatus(ManagerStatus status);
+
+    Optional<Manager> findAllByStatus(ManagerStatus status);
+    List<Manager> findAll();
+
+
 }

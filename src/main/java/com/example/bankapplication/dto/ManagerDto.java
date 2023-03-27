@@ -1,9 +1,9 @@
 package com.example.bankapplication.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Value;
 
 import java.sql.Timestamp;
-import java.util.UUID;
 
 @Value
 public class ManagerDto {
@@ -14,9 +14,10 @@ public class ManagerDto {
     String lastName;
 
     String status;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+    Timestamp createdAt;
 
-//    String createdAt;
-
-//    String updatedAt;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+    Timestamp updatedAt;
 }
 
