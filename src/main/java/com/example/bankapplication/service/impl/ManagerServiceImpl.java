@@ -1,7 +1,6 @@
 package com.example.bankapplication.service.impl;
 
 import com.example.bankapplication.dto.ManagerDto;
-import com.example.bankapplication.dto.ManagerListDto;
 import com.example.bankapplication.entity.enums.ManagerStatus;
 import com.example.bankapplication.mapper.ManagerMapper;
 import com.example.bankapplication.repository.ManagerRepository;
@@ -12,6 +11,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -30,9 +31,8 @@ public class ManagerServiceImpl implements ManagerService {
                         ((ErrorMessage.MANAGER_NOT_FOUND_BY_STATUS))));
     }
 
-    public ManagerListDto findAllManagers() {
+    public List<ManagerDto> findAllManagers() {
         log.info("Get all  managers");
-        return new ManagerListDto(managerMapper.managersToManagersDto
-                (managerRepository.findAll()));
+        return managerMapper.managersToManagersDto(managerRepository.findAll());
     }
 }

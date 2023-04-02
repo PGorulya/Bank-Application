@@ -2,7 +2,6 @@ package com.example.bankapplication.service.impl;
 
 
 import com.example.bankapplication.dto.AccountDto;
-import com.example.bankapplication.dto.AccountListDto;
 import com.example.bankapplication.entity.enums.AccountStatus;
 import com.example.bankapplication.mapper.AccountMapper;
 import com.example.bankapplication.repository.AccountRepository;
@@ -15,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.nio.channels.AcceptPendingException;
+import java.util.List;
 import java.util.UUID;
 
 import static com.example.bankapplication.service.exception.ErrorMessage.ACCOUNT_NOT_FOUND_BY_ID;
@@ -29,15 +29,15 @@ public class AccountServiceImpl implements AccountService {
     @Override
     @Transactional(readOnly = true)
     public AccountDto getAccountById(UUID id) {
-        log.info("Get accounts with {}", id);
+        log.info("Get accounts with id = {}", id);
         return accountMapper.toDto(accountRepository.findById(id).orElseThrow(
                 () -> new AccountNotFoundException(ErrorMessage.ACCOUNT_NOT_FOUND_BY_ID)));
     }
 
     @Override
-    public AccountListDto getAllAccountsActive() {
+    public List<AccountDto> getAllAccountsActive() {
         log.info("Get all active accounts");
-        return new AccountListDto(accountMapper.accountsToAccountsDto
-                (accountRepository.getAllByStatus(AccountStatus.ACTIVE)));
+        return accountMapper.accountsToAccountsDto
+                (accountRepository.getAllByStatus(AccountStatus.ACTIVE));
     }
 }

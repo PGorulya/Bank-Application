@@ -2,13 +2,13 @@ package com.example.bankapplication.controller;
 
 
 import com.example.bankapplication.dto.AccountDto;
-import com.example.bankapplication.dto.AccountListDto;
 import com.example.bankapplication.service.util.AccountService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigInteger;
+import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -27,7 +27,7 @@ public class AccountController {
 
     @GetMapping("/accounts")
     @ResponseStatus(HttpStatus.OK)
-    public AccountListDto getAllAccounts() {
+    public List<AccountDto> getAllAccounts() {
 
         return accountService.getAllAccountsActive();
     }
