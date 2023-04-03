@@ -7,7 +7,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-import java.math.BigInteger;
 import java.util.List;
 import java.util.UUID;
 
@@ -21,14 +20,12 @@ public class AccountController {
     @GetMapping("/accounts/{id}")
     @ResponseStatus(HttpStatus.OK)
     public AccountDto getInfoAboutAccount(@PathVariable UUID id) {
-
         return accountService.getAccountById(id);
     }
 
     @GetMapping("/accounts")
     @ResponseStatus(HttpStatus.OK)
     public List<AccountDto> getAllAccounts() {
-
         return accountService.getAllAccountsActive();
     }
 }

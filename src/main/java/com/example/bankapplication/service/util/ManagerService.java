@@ -7,7 +7,9 @@ import java.util.List;
 
 public interface ManagerService {
 
-    ManagerDto findAllManagersByStatus(ManagerStatus status);
+    List<ManagerDto> findAllManagersByStatus(ManagerStatus status);
 
     List<ManagerDto> findAllManagers();
+
+    ManagerDto addNewManager(ManagerDto managerDto);
 }

@@ -25,7 +25,7 @@ import java.util.UUID;
 public class Account {
 
     @Id
-    @GeneratedValue(generator = "UUID", strategy = GenerationType.IDENTITY)
+    @GeneratedValue(generator = "UUID", strategy = GenerationType.AUTO)
     @Column(name = "id")
     private UUID id;
 

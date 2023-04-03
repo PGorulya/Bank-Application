@@ -13,11 +13,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.nio.channels.AcceptPendingException;
 import java.util.List;
 import java.util.UUID;
-
-import static com.example.bankapplication.service.exception.ErrorMessage.ACCOUNT_NOT_FOUND_BY_ID;
 
 @Service
 @RequiredArgsConstructor

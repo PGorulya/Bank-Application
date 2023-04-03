@@ -19,5 +19,7 @@ public class ManagerDto {
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     Timestamp updatedAt;
+
+
 }
 

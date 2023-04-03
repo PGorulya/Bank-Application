@@ -7,12 +7,17 @@ import org.mapstruct.Mapper;
 
 import java.util.List;
 
+import static org.mapstruct.InjectionStrategy.CONSTRUCTOR;
 
-@Mapper(componentModel = "spring")
+
+@Mapper(componentModel = "spring", injectionStrategy = CONSTRUCTOR)
+
 public interface ManagerMapper {
 
     ManagerDto toDto(Manager manager);
 
     List<ManagerDto> managersToManagersDto(List<Manager> managers);
+
+    Manager dtoToManager(ManagerDto managerDto);
 
 }
