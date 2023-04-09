@@ -2,7 +2,7 @@ package com.example.bankapplication.entity;
 
 import com.example.bankapplication.entity.enums.AccountStatus;
 import com.example.bankapplication.entity.enums.AccountType;
-import com.example.bankapplication.entity.enums.CurrencyType;
+import com.example.bankapplication.entity.enums.CurrencyCode;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -33,19 +33,19 @@ public class Account {
     private String name;
 
     @Column(name = "type", nullable = false)
-    @Enumerated(EnumType.ORDINAL)
+    @Enumerated(EnumType.STRING)
     private AccountType type;
 
     @Column(name = "status", nullable = false)
-    @Enumerated(EnumType.ORDINAL)
+    @Enumerated(EnumType.STRING)
     private AccountStatus status;
 
     @Column(name = "balance", nullable = false, precision = 2)
     private BigDecimal balance;
 
     @Column(name = "currency_code", nullable = false)
-    @Enumerated(EnumType.ORDINAL)
-    private CurrencyType currencyCode;
+    @Enumerated(EnumType.STRING)
+    private CurrencyCode currencyCode;
 
     @Column(name = "created_at", nullable = false)
     private Timestamp createdAt;

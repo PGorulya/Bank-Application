@@ -1,12 +1,14 @@
 package com.example.bankapplication.entity.enums;
 
-public enum AgreementStatus {
-    ACTIVE("ACTIVE"),
-    PENDING("PENDING"),
-    REMOVED("REMOVED");
+public enum CurrencyCode {
+    EUR("EUR"),
+    USD("USD"),
+    UAH("UAH"),
+    RUB("RUB");
+
     private final String value;
 
-    AgreementStatus(String value) {
+    CurrencyCode(String value) {
         this.value = value;
     }
 

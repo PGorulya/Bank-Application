@@ -1,6 +1,6 @@
 package com.example.bankapplication.entity;
 
-import com.example.bankapplication.entity.enums.CurrencyType;
+import com.example.bankapplication.entity.enums.CurrencyCode;
 import com.example.bankapplication.entity.enums.ProductStatus;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -31,12 +31,12 @@ public class Product {
     private String name;
 
     @Column(name = "status", nullable = false)
-    @Enumerated(EnumType.ORDINAL)
+    @Enumerated(EnumType.STRING)
     private ProductStatus status;
 
-    @Column(name = "currenct_code", nullable = false)
-    @Enumerated(EnumType.ORDINAL)
-    private CurrencyType currencyCode;
+    @Column(name = "currency_code", nullable = false)
+    @Enumerated(EnumType.STRING)
+    private CurrencyCode currencyCode;
 
     @Column(name = "interest_rate", nullable = false, precision = 4)
     private BigDecimal interestRate;

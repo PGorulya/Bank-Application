@@ -29,7 +29,7 @@ public class Agreement {
     private BigDecimal interestRate;
 
     @Column(name = "status", nullable = false)
-    @Enumerated(EnumType.ORDINAL)
+    @Enumerated(EnumType.STRING)
     private AgreementStatus status;
 
     @Column(name = "sum", nullable = false, precision = 2)

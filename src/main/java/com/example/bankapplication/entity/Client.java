@@ -26,7 +26,7 @@ public class Client {
     private UUID id;
 
     @Column(name = "status", nullable = false)
-    @Enumerated(EnumType.ORDINAL)
+    @Enumerated(EnumType.STRING)
     private ClientStatus status;
 
     @Column(name = "tax_code", nullable = false, length = 20)

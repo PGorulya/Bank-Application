@@ -1,16 +1,16 @@
 package com.example.bankapplication.entity.enums;
 
 public enum TransactionType {
-    NEW(0),
-    PENDING(1),
-    APPROVED(2);
-    private final int value;
+    NEW("NEW"),
+    PENDING("PENDING"),
+    APPROVED("APPROVED");
+    private final String value;
 
-    TransactionType(int value) {
+    TransactionType(String value) {
         this.value = value;
     }
 
-    public int getValue() {
+    public String getValue() {
         return value;
     }
 }

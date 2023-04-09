@@ -30,7 +30,7 @@ public class Manager {
     private String lastName;
 
     @Column(name = "status", nullable = false)
-    @Enumerated(EnumType.ORDINAL)
+    @Enumerated(EnumType.STRING)
     private ManagerStatus status;
 
     @Column(name = "created_at", nullable = false)

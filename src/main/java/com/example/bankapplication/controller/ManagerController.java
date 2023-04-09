@@ -1,6 +1,7 @@
 package com.example.bankapplication.controller;
 
 import com.example.bankapplication.dto.ManagerDto;
+import com.example.bankapplication.entity.Manager;
 import com.example.bankapplication.entity.enums.ManagerStatus;
 import com.example.bankapplication.service.util.ManagerService;
 import lombok.RequiredArgsConstructor;
@@ -10,6 +11,8 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.UUID;
+
 @Validated
 @RestController
 @RequestMapping(value = "/auth")
@@ -35,4 +38,16 @@ public class ManagerController {
     public ManagerDto addNewManager(@Valid @RequestBody ManagerDto managerDto) {
         return managerService.addNewManager(managerDto);
     }
+
+    @PutMapping(path = "/managers/edit/{id}", consumes = {"application/json"})
+    @ResponseStatus(HttpStatus.CREATED)
+    public ManagerDto editManagerById(@PathVariable UUID id, @Valid @RequestBody ManagerDto managerDto) {
+        return managerService.editManagerById(id, managerDto);
+    }
+
+    @DeleteMapping("managers/delete/{id}")
+    public void delete(@PathVariable UUID id){
+        managerService.deleteById(id);
+    }
+
 }

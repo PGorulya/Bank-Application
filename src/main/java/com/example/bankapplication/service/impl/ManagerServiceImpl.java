@@ -32,9 +32,10 @@ public class ManagerServiceImpl implements ManagerService {
     @Transactional(readOnly = true)
     public List<ManagerDto> findAllManagersByStatus(ManagerStatus status) {
         log.info("Get managers with status {}", status);
-        return managerMapper.managersToManagersDto(managerRepository.findAllByStatus(status).orElseThrow(
-                () -> new ManagerNotFoundException
-                        ((ErrorMessage.MANAGER_NOT_FOUND_BY_STATUS))));
+        return managerMapper.managersToManagersDto(managerRepository.findAllByStatus(status).
+                orElseThrow(
+                        () -> new ManagerNotFoundException
+                            ((ErrorMessage.MANAGER_NOT_FOUND_BY_STATUS))));
     }
 
     public List<ManagerDto> findAllManagers() {
@@ -57,9 +58,33 @@ public class ManagerServiceImpl implements ManagerService {
         return managerMapper.toDto(manager);
     }
 
-    public void checkManagerExist(String firstName, String lastName){
-        Manager exustManager = managerRepository.findByFirstNameAndLastName(firstName, lastName);
-        if (exustManager != null)
+
+    private void checkManagerExist(String firstName, String lastName){
+        Manager existManager = managerRepository.findByFirstNameAndLastName(firstName, lastName);
+        if (existManager != null)
             throw new ManagerExistException("The manager with the same firstName and lastName already exists");
+    }
+
+    @Override
+    public ManagerDto editManagerById(UUID id, ManagerDto managerDto) {
+        var manager = managerRepository.findManagerById(id).orElseThrow(
+                () -> new ManagerNotFoundException(ErrorMessage.MANAGER_NOT_FOUND_BY_ID)
+        );
+
+        manager.setFirstName(managerDto.getFirstName());
+        manager.setLastName(managerDto.getLastName());
+        manager.setStatus(ManagerStatus.valueOf(managerDto.getStatus()));
+        manager.setUpdatedAt(new Timestamp(System.currentTimeMillis()));
+        log.info("Edit manager {}", manager);
+
+        var result = managerRepository.save(manager);
+        return managerMapper.toDto(result);
+    }
+
+    @Override
+    @Transactional
+    public void deleteById(UUID id) {
+        log.info("Deleting manager {}", id);
+        managerRepository.deleteById(id);
     }
 }

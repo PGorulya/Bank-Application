@@ -17,7 +17,7 @@
             </column>
             <column name="first_name" type="varchar(50)"/>
             <column name="last_name" type="varchar(50)"/>
-            <column name="status" type="tinyint(1)"/>
+            <column name="status" type="varchar(20)"/>
             <column name="created_at" type="timestamp">
                 <constraints nullable="false"/>
             </column>
@@ -40,7 +40,7 @@
             <column name="manager_id" type="BINARY(16)">
                 <constraints nullable="true"/>
             </column>
-            <column name="status" type="tinyint(1)"/>
+            <column name="status" type="varchar(20)"/>
             <column name="tax_code" type="varchar(20)"/>
             <column name="first_name" type="varchar(50)"/>
             <column name="last_name" type="varchar(50)"/>
@@ -70,10 +70,10 @@
                              referencedColumnNames="id"/>
             </column>
             <column name="name" type="varchar(100)"/>
-            <column name="type" type="tinyint(1)"/>
-            <column name="status" type="tinyint(1)"/>
+            <column name="type" type="varchar(20)"/>
+            <column name="status" type="varchar(20)"/>
             <column name="balance" type="decimal(15,2)"/>
-            <column name="currency_code" type="tinyint(2)"/>
+            <column name="currency_code" type="varchar(20)"/>
             <column name="created_at" type="timestamp"/>
             <column name="updated_at" type="timestamp"/>
         </createTable>
@@ -94,8 +94,8 @@
                 <constraints foreignKeyName="true" referencedTableName="managers" referencedColumnNames="id"/>
             </column>
             <column name="name" type="varchar(70)"/>
-            <column name="status" type="tinyint(1)"/>
-            <column name="currency_code" type="int(2)"/>
+            <column name="status" type="varchar(20)"/>
+            <column name="currency_code" type="varchar(20)"/>
             <column name="interest_rate" type="decimal(6,4)"/>
             <column name="limit" type="int"/>
             <column name="created_at" type="timestamp"/>
@@ -124,7 +124,7 @@
                              referencedColumnNames="id"/>
             </column>
             <column name="interest_rate" type="decimal(6,4)" defaultValueNumeric="0.0000"/>
-            <column name="status" type="tinyint(1)" defaultValueNumeric="0"/>
+            <column name="status" type="varchar(20)" defaultValueNumeric="0"/>
             <column name="sum" type="decimal(15,2)" defaultValueNumeric="0.00"/>
             <column name="created_at" type="timestamp"/>
             <column name="updated_at" type="timestamp">
@@ -152,7 +152,7 @@
                 <constraints foreignKeyName="fk_credit_account_id" referencedTableName="accounts"
                              referencedColumnNames="id"/>
             </column>
-            <column name="type" type="tinyint(1)"/>
+            <column name="type" type="varchar(20)"/>
             <column name="amount" type="decimal(12,4)"/>
             <column name="description" type="varchar(250)"/>
             <column name="created_at" type="timestamp">
