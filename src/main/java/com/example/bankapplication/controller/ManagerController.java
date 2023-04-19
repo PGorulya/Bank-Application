@@ -1,9 +1,8 @@
 package com.example.bankapplication.controller;
 
 import com.example.bankapplication.dto.ManagerDto;
-import com.example.bankapplication.entity.Manager;
 import com.example.bankapplication.entity.enums.ManagerStatus;
-import com.example.bankapplication.service.util.ManagerService;
+import com.example.bankapplication.service.ManagerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
@@ -21,16 +20,16 @@ public class ManagerController {
 
     private final ManagerService managerService;
 
-    @GetMapping("/managers/{status}")
+    @GetMapping("/managers/status/{status}")
     @ResponseStatus(HttpStatus.OK)
     public List<ManagerDto> getAllManagersByStatus(@PathVariable ManagerStatus status) {
-        return managerService.findAllManagersByStatus(status);
+        return managerService.getAllManagersByStatus(status);
     }
 
     @GetMapping("/managers")
     @ResponseStatus(HttpStatus.OK)
     public List<ManagerDto> getAllManagers() {
-        return managerService.findAllManagers();
+        return managerService.getAllManagers();
     }
 
     @PostMapping(value = "/managers/newManager", consumes = {"application/json"})
@@ -47,7 +46,7 @@ public class ManagerController {
 
     @DeleteMapping("managers/delete/{id}")
     public void delete(@PathVariable UUID id){
-        managerService.deleteById(id);
+        managerService.deleteManagerById(id);
     }
 
 }

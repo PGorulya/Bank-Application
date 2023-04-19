@@ -7,13 +7,15 @@ import org.mapstruct.Mapping;
 
 import java.util.List;
 
-@Mapper(componentModel = "spring")
+import static org.mapstruct.InjectionStrategy.CONSTRUCTOR;
+
+@Mapper(componentModel = "spring", injectionStrategy = CONSTRUCTOR)
 public interface AccountMapper {
 
     @Mapping(source = "account.client.id", target = "clientId")
     AccountDto toDto(Account account);
 
-    List<AccountDto> accountsToAccountsDto(List<Account> account);
+    List<AccountDto> accountsToAccountsDto(List<Account> accounts);
 
-
+    Account toAccount(AccountDto accountDto);
 }

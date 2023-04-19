@@ -8,7 +8,7 @@ import com.example.bankapplication.repository.ManagerRepository;
 import com.example.bankapplication.service.exception.ErrorMessage;
 import com.example.bankapplication.service.exception.ManagerExistException;
 import com.example.bankapplication.service.exception.ManagerNotFoundException;
-import com.example.bankapplication.service.util.ManagerService;
+import com.example.bankapplication.service.ManagerService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -30,23 +30,26 @@ public class ManagerServiceImpl implements ManagerService {
 
     @Override
     @Transactional(readOnly = true)
-    public List<ManagerDto> findAllManagersByStatus(ManagerStatus status) {
+    public List<ManagerDto> getAllManagersByStatus(ManagerStatus status) {
         log.info("Get managers with status {}", status);
-        return managerMapper.managersToManagersDto(managerRepository.findAllByStatus(status).
+        return managerMapper.managersToManagersDto
+                (managerRepository.findAllByStatus(status).
                 orElseThrow(
                         () -> new ManagerNotFoundException
                             ((ErrorMessage.MANAGER_NOT_FOUND_BY_STATUS))));
     }
 
-    public List<ManagerDto> findAllManagers() {
+    @Override
+    public List<ManagerDto> getAllManagers() {
         log.info("Get all  managers");
-        return managerMapper.managersToManagersDto(managerRepository.findAll());
+        return managerMapper.managersToManagersDto(managerRepository.findAllManagers());
     }
 
     @Override
     @Transactional
     public ManagerDto addNewManager(ManagerDto managerDto) {
-        Manager manager = managerMapper.dtoToManager(managerDto);
+        log.info("Addition the new Manager");
+        Manager manager = managerMapper.toManager(managerDto);
         checkManagerExist(manager.getFirstName(), manager.getLastName());
 
         manager.setId(UUID.randomUUID());
@@ -61,11 +64,12 @@ public class ManagerServiceImpl implements ManagerService {
 
     private void checkManagerExist(String firstName, String lastName){
         Manager existManager = managerRepository.findByFirstNameAndLastName(firstName, lastName);
-        if (existManager != null)
+        if (existManager.getId() != null)
             throw new ManagerExistException("The manager with the same firstName and lastName already exists");
     }
 
     @Override
+    @Transactional
     public ManagerDto editManagerById(UUID id, ManagerDto managerDto) {
         var manager = managerRepository.findManagerById(id).orElseThrow(
                 () -> new ManagerNotFoundException(ErrorMessage.MANAGER_NOT_FOUND_BY_ID)
@@ -83,7 +87,7 @@ public class ManagerServiceImpl implements ManagerService {
 
     @Override
     @Transactional
-    public void deleteById(UUID id) {
+    public void deleteManagerById(UUID id) {
         log.info("Deleting manager {}", id);
         managerRepository.deleteById(id);
     }
