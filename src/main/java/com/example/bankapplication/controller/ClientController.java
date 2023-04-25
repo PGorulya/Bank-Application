@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.UUID;
 
@@ -29,4 +30,11 @@ public class ClientController {
     public List<ClientDto> getAllClients() {
         return clientService.getAllClients();
     }
+
+    @PostMapping(path = "/clients/newClient", consumes = {"application/json"})
+    @ResponseStatus(HttpStatus.CREATED)
+    public ClientDto addNewClient(@Valid @RequestBody ClientDto clientDto) {
+        return clientService.addNewClient(clientDto);
+    }
+
 }

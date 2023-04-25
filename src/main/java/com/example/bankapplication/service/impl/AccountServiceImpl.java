@@ -54,7 +54,7 @@ public class AccountServiceImpl implements AccountService {
     public List<AccountDto> getAllAccounts() {
         log.info("Get all accounts");
         return accountMapper.accountsToAccountsDto
-                (accountRepository.findAllAccounts());
+                (accountRepository.findAll());
     }
 
     @Override
@@ -73,6 +73,8 @@ public class AccountServiceImpl implements AccountService {
         account.setId(UUID.randomUUID());
         account.setCreatedAt(Timestamp.valueOf(LocalDateTime.now()));
         account.setUpdatedAt(Timestamp.valueOf(LocalDateTime.now()));
+        log.info("Created new account {}", account);
+        accountRepository.save(account);
         return accountMapper.toDto(account);
     }
 

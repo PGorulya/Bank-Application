@@ -12,7 +12,8 @@ public interface ManagerRepository extends JpaRepository<Manager, UUID> {
 
     Optional<List<Manager>> findAllByStatus(ManagerStatus status);
 
-    List<Manager> findAllManagers();
+    List<Manager> findAll();
+
 
     Manager findByFirstNameAndLastName(String firstName, String lastName);
 

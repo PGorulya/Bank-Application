@@ -42,7 +42,7 @@ public class ManagerServiceImpl implements ManagerService {
     @Override
     public List<ManagerDto> getAllManagers() {
         log.info("Get all  managers");
-        return managerMapper.managersToManagersDto(managerRepository.findAllManagers());
+        return managerMapper.managersToManagersDto(managerRepository.findAll());
     }
 
     @Override
@@ -55,7 +55,7 @@ public class ManagerServiceImpl implements ManagerService {
         manager.setId(UUID.randomUUID());
         manager.setCreatedAt(Timestamp.valueOf(LocalDateTime.now()));
         manager.setUpdatedAt(Timestamp.valueOf(LocalDateTime.now()));
-        log.info("Add new manager {}", manager);
+        log.info("Added new manager {}", manager);
 
         managerRepository.save(manager);
         return managerMapper.toDto(manager);
@@ -64,7 +64,7 @@ public class ManagerServiceImpl implements ManagerService {
 
     private void checkManagerExist(String firstName, String lastName){
         Manager existManager = managerRepository.findByFirstNameAndLastName(firstName, lastName);
-        if (existManager.getId() != null)
+        if (existManager != null)
             throw new ManagerExistException("The manager with the same firstName and lastName already exists");
     }
 

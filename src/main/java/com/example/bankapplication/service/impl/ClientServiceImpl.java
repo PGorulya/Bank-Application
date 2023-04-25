@@ -1,9 +1,11 @@
 package com.example.bankapplication.service.impl;
 
 import com.example.bankapplication.dto.ClientDto;
+import com.example.bankapplication.entity.Client;
 import com.example.bankapplication.mapper.ClientMapper;
 import com.example.bankapplication.repository.ClientRepository;
 import com.example.bankapplication.service.ClientService;
+import com.example.bankapplication.service.exception.ClientExistException;
 import com.example.bankapplication.service.exception.ClientNotFoundException;
 import com.example.bankapplication.service.exception.ErrorMessage;
 import lombok.RequiredArgsConstructor;
@@ -11,6 +13,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
@@ -26,7 +30,7 @@ public class ClientServiceImpl implements ClientService {
     public List<ClientDto> getAllClients() {
         log.info("Get all clients");
         return clientMapper.clientsToClientsDto
-                (clientRepository.findAllClients());
+                (clientRepository.findAll());
     }
 
     @Override
@@ -38,5 +42,22 @@ public class ClientServiceImpl implements ClientService {
                         () -> new ClientNotFoundException
                                 (ErrorMessage.CLIENT_NOT_FOUND_BY_ID)));
 
+    }
+
+    @Override
+    public ClientDto addNewClient(ClientDto clientDto) {
+        log.info("Addition the new Client");
+        Client client = clientMapper.toClient(clientDto);
+        Client existClient = clientRepository.findByTaxCode(client.getTaxCode());
+        if(existClient != null)
+            throw new ClientExistException("The client with the same Tax Code already exists");
+
+        client.setId(UUID.randomUUID());
+        client.setCreatedAt(Timestamp.valueOf(LocalDateTime.now()));
+        client.setUpdatedAt(Timestamp.valueOf(LocalDateTime.now()));
+        log.info("Add new client {}", client);
+
+        clientRepository.save(client);
+        return clientMapper.toDto(client);
     }
 }

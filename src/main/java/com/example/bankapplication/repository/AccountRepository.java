@@ -14,5 +14,5 @@ public interface AccountRepository extends JpaRepository<Account, UUID> {
 
     Optional<Account> findAccountById(UUID id);
 
-    List<Account> findAllAccounts();
+    List<Account> findAll();
 }
