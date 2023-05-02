@@ -64,7 +64,7 @@ public class AccountServiceImpl implements AccountService {
         if(accountDto.getClientId() == null)
             throw new IllegalArgumentException("clientId is null");
         var idClient = accountDto.getClientId();
-        var client = clientRepository.findClientById(UUID.fromString(idClient)).
+        clientRepository.findClientById(UUID.fromString(idClient)).
                 orElseThrow(
                     ()-> new ClientNotFoundException(ErrorMessage.CLIENT_NOT_FOUND));
 
