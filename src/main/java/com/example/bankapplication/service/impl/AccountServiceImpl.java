@@ -35,8 +35,8 @@ public class AccountServiceImpl implements AccountService {
         log.info("Get accounts with id = {}", id);
         return accountMapper.toDto(accountRepository.findAccountById(id).
                 orElseThrow(
-                () -> new AccountNotFoundException
-                        (ErrorMessage.ACCOUNT_NOT_FOUND_BY_ID)));
+                        () -> new AccountNotFoundException
+                                (ErrorMessage.ACCOUNT_NOT_FOUND_BY_ID)));
     }
 
     @Override

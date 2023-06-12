@@ -1,11 +1,9 @@
 package com.example.bankapplication.service.util;
 
 import com.example.bankapplication.entity.Account;
+import com.example.bankapplication.entity.Client;
 import com.example.bankapplication.entity.Manager;
-import com.example.bankapplication.entity.enums.AccountStatus;
-import com.example.bankapplication.entity.enums.AccountType;
-import com.example.bankapplication.entity.enums.CurrencyCode;
-import com.example.bankapplication.entity.enums.ManagerStatus;
+import com.example.bankapplication.entity.enums.*;
 import lombok.experimental.UtilityClass;
 
 import java.math.BigDecimal;
@@ -46,4 +44,22 @@ public class EntityCreator {
                 null //new HashSet<>()
         );
     }
+
+    public static Client getClientEntity() {
+        return new Client(
+                UUID_EXAMPLE,
+                ClientStatus.ACTIVE,
+                "9812345",
+                "Maik",
+                "Arnd",
+                "maik.arnd@google.com",
+                "Kasseler str.19, Egalstadt Germany",
+                "+49155729877",
+                Timestamp.valueOf(LocalDateTime.of(2023, 3, 13, 10, 0, 0)),
+                Timestamp.valueOf(LocalDateTime.of(2023, 3, 13, 10, 0, 0)),
+                null,
+                null
+        );
+    }
+
 }
