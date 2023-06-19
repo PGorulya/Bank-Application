@@ -4,6 +4,7 @@ import com.example.bankapplication.dto.AccountDto;
 import com.example.bankapplication.entity.Account;
 import com.example.bankapplication.mapper.AccountMapper;
 import com.example.bankapplication.repository.AccountRepository;
+import com.example.bankapplication.service.exception.AccountNotFoundException;
 import com.example.bankapplication.service.util.DtoCreator;
 import com.example.bankapplication.service.util.EntityCreator;
 import org.junit.jupiter.api.DisplayName;
@@ -15,6 +16,9 @@ import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Optional;
+import java.util.UUID;
+
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @DisplayName("Account Service test class")
 @ExtendWith(MockitoExtension.class)
@@ -44,7 +48,10 @@ class AccountServiceImplTest {
     }
 
     @Test
+    @DisplayName("Negative test. There is no element. Get account by Id.")
     void getNonExistAccountByIdTest() {
+        UUID id = EntityCreator.UUID_EXAMPLE_CLIENT;
+        assertThrows(AccountNotFoundException.class, () -> service.getAccountById(id));
     }
 
     @Test

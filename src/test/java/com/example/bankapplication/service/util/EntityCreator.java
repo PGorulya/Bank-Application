@@ -14,6 +14,7 @@ import java.util.UUID;
 @UtilityClass
 public class EntityCreator {
     public static final UUID UUID_EXAMPLE = UUID.fromString("788e611c-de42-4a94-a301-efac55bf159b");
+    public static final UUID UUID_EXAMPLE_CLIENT = UUID.fromString("738a065c-e9fe-4095-93bb-fb8d7dcb212c");
 
     public static Account getAccountEntity() {
         return new Account(
@@ -47,14 +48,14 @@ public class EntityCreator {
 
     public static Client getClientEntity() {
         return new Client(
-                UUID_EXAMPLE,
+                UUID_EXAMPLE_CLIENT,
                 ClientStatus.ACTIVE,
-                "9812345",
+                "987456321",
                 "Maik",
                 "Arnd",
                 "maik.arnd@google.com",
-                "Kasseler str.19, Egalstadt Germany",
-                "+49155729877",
+                "Kasseler Str.19, Egalstadt Germany",
+                "+491557298777",
                 Timestamp.valueOf(LocalDateTime.of(2023, 3, 13, 10, 0, 0)),
                 Timestamp.valueOf(LocalDateTime.of(2023, 3, 13, 10, 0, 0)),
                 null,

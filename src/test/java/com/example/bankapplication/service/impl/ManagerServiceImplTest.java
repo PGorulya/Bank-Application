@@ -9,8 +9,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 @DisplayName("Manager Service test class")
 @ExtendWith(MockitoExtension.class)
 class ManagerServiceImplTest {

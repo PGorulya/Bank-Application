@@ -4,6 +4,8 @@ import com.example.bankapplication.dto.ClientDto;
 import com.example.bankapplication.entity.Client;
 import com.example.bankapplication.mapper.ClientMapper;
 import com.example.bankapplication.repository.ClientRepository;
+import com.example.bankapplication.service.exception.AccountNotFoundException;
+import com.example.bankapplication.service.exception.ClientNotFoundException;
 import com.example.bankapplication.service.util.DtoCreator;
 import com.example.bankapplication.service.util.EntityCreator;
 import org.junit.jupiter.api.DisplayName;
@@ -15,6 +17,9 @@ import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Optional;
+import java.util.UUID;
+
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 
 @DisplayName("Client Service test class")
@@ -50,6 +55,12 @@ class ClientServiceImplTest {
         Mockito.verify(clientMapper).toDto(client);
     }
 
+    @Test
+    @DisplayName("Negative test. There is no element. Get client by Id.")
+    void getNotExistClientByIdTest() {
+        UUID id = EntityCreator.UUID_EXAMPLE;
+        assertThrows(ClientNotFoundException.class, () -> service.getClientById(id));
+    }
     @Test
     void addNewClientTest() {
     }
