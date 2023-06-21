@@ -2,9 +2,9 @@ package com.example.bankapplication.service.impl;
 
 import com.example.bankapplication.dto.ClientDto;
 import com.example.bankapplication.entity.Client;
+import com.example.bankapplication.entity.enums.ClientStatus;
 import com.example.bankapplication.mapper.ClientMapper;
 import com.example.bankapplication.repository.ClientRepository;
-import com.example.bankapplication.service.exception.AccountNotFoundException;
 import com.example.bankapplication.service.exception.ClientNotFoundException;
 import com.example.bankapplication.service.util.DtoCreator;
 import com.example.bankapplication.service.util.EntityCreator;
@@ -16,6 +16,8 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -32,12 +34,42 @@ class ClientServiceImplTest {
     @Mock
     ClientRepository clientRepository;
 
+    private final ClientStatus status = ClientStatus.ACTIVE;
+    Client client = EntityCreator.getClientEntity();
+    ClientDto clientDto = DtoCreator.getClientDto();
+
     @Test
+    @DisplayName("Positive test. Get all clients by status")
     void getAllClientsByStatusTest() {
+        List<Client> clientList = new ArrayList<>();
+        clientList.add(client);
+        List<ClientDto> clientDtoList = new ArrayList<>();
+        clientDtoList.add(clientDto);
+
+        Mockito.when(clientRepository.findAllByStatus(status)).thenReturn(Optional.of(clientList));
+        Mockito.when(clientMapper.clientsToClientsDto(clientList)).thenReturn(clientDtoList);
+
+        service.getAllClientsByStatus(status);
+
+        Mockito.verify(clientRepository).findAllByStatus(status);
+        Mockito.verify(clientMapper).clientsToClientsDto(clientList);
     }
 
     @Test
+    @DisplayName("Positive test. Get all clients")
     void getAllClientsTest() {
+        List<Client> clientList = new ArrayList<>();
+        clientList.add(client);
+        List<ClientDto> clientDtoList = new ArrayList<>();
+        clientDtoList.add(clientDto);
+
+        Mockito.when(clientRepository.findAll()).thenReturn(clientList);
+        Mockito.when(clientMapper.clientsToClientsDto(clientList)).thenReturn(clientDtoList);
+
+        service.getAllClients();
+
+        Mockito.verify(clientRepository).findAll();
+        Mockito.verify(clientMapper).clientsToClientsDto(clientList);
     }
 
     @Test

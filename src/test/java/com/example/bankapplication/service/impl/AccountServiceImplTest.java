@@ -2,6 +2,7 @@ package com.example.bankapplication.service.impl;
 
 import com.example.bankapplication.dto.AccountDto;
 import com.example.bankapplication.entity.Account;
+import com.example.bankapplication.entity.enums.AccountStatus;
 import com.example.bankapplication.mapper.AccountMapper;
 import com.example.bankapplication.repository.AccountRepository;
 import com.example.bankapplication.service.exception.AccountNotFoundException;
@@ -15,6 +16,8 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -30,13 +33,14 @@ class AccountServiceImplTest {
     @Mock
     AccountRepository accountRepository;
 
+    private final AccountStatus status = AccountStatus.ACTIVE;
+    Account account = EntityCreator.getAccountEntity();
+    AccountDto accountDto = DtoCreator.getAccountDto();
 //    ClientRepository clientRepository;
 
     @Test
     @DisplayName("Positive Test. Get account by id")
     void getAccountByIdTest() {
-        Account account = EntityCreator.getAccountEntity();
-        AccountDto accountDto = DtoCreator.getAccountDto();
 
         Mockito.when(accountRepository.findAccountById(account.getId())).thenReturn(Optional.of(account));
         Mockito.when(accountMapper.toDto(account)).thenReturn(accountDto);
@@ -55,11 +59,36 @@ class AccountServiceImplTest {
     }
 
     @Test
+    @DisplayName("Positive test. Get all accounts by status")
     void getAllAccountsByStatusTest() {
+        List<Account> accountList = new ArrayList<>();
+        accountList.add(account);
+        List<AccountDto> accountDtoList = new ArrayList<>();
+        accountDtoList.add(accountDto);
+
+        Mockito.when(accountRepository.findAllByStatus(status)).thenReturn(Optional.of(accountList));
+        Mockito.when(accountMapper.accountsToAccountsDto(accountList)).thenReturn(accountDtoList);
+
+        service.getAllAccountsByStatus(status);
+
+        Mockito.verify(accountRepository).findAllByStatus(status);
+        Mockito.verify(accountMapper).accountsToAccountsDto(accountList);
     }
 
     @Test
+    @DisplayName("Positive test. Get all accounts")
     void getAllAccountsTest() {
+        List<Account> accountList = new ArrayList<>();
+        accountList.add(account);
+        List<AccountDto> accountDtoList = new ArrayList<>();
+        accountDtoList.add(DtoCreator.getAccountDto());
+
+        Mockito.when(accountRepository.findAll()).thenReturn(accountList);
+        Mockito.when(accountMapper.accountsToAccountsDto(accountList)).thenReturn(accountDtoList);
+
+        service.getAllAccounts();
+        Mockito.verify(accountRepository).findAll();
+        Mockito.verify(accountMapper).accountsToAccountsDto(accountList);
     }
 
     @Test
