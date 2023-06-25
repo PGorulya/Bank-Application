@@ -36,7 +36,6 @@ class AccountServiceImplTest {
     private final AccountStatus status = AccountStatus.ACTIVE;
     Account account = EntityCreator.getAccountEntity();
     AccountDto accountDto = DtoCreator.getAccountDto();
-//    ClientRepository clientRepository;
 
     @Test
     @DisplayName("Positive Test. Get account by id")

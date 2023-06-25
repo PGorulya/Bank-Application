@@ -29,7 +29,7 @@ class ClientMapperTest {
     @DisplayName("Positive test. Clients list mapper to list ClientDto")
     void clientsToClientsDtoTest() {
         Client client = EntityCreator.getClientEntity();
-        List<Client> clientList = new ArrayList();
+        List<Client> clientList = new ArrayList<>();
         clientList.add(client);
         List<ClientDto> ClientDtoList = new ArrayList<>();
         ClientDtoList.add(DtoCreator.getClientDto());
