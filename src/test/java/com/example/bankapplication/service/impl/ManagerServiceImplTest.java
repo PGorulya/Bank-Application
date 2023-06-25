@@ -67,15 +67,4 @@ class ManagerServiceImplTest {
         Mockito.verify(managerMapper).managersToManagersDto(managerList);
     }
 
-    @Test
-    void addNewManagerTest() {
-    }
-
-    @Test
-    void editManagerByIdTest() {
-    }
-
-    @Test
-    void deleteManagerByIdTest() {
-    }
 }

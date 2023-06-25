@@ -90,11 +90,4 @@ class AccountServiceImplTest {
         Mockito.verify(accountMapper).accountsToAccountsDto(accountList);
     }
 
-    @Test
-    void createAccountTest() {
-    }
-
-    @Test
-    void deleteAccountByIdTest() {
-    }
 }

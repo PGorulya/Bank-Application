@@ -48,6 +48,7 @@ public class AccountServiceImpl implements AccountService {
                 orElseThrow(
                         () -> new AccountNotFoundException
                                 ((ErrorMessage.ACCOUNT_NOT_FOUND_BY_STATUS))));
+
     }
 
     @Override

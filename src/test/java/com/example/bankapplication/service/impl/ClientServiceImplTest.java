@@ -93,11 +93,5 @@ class ClientServiceImplTest {
         UUID id = EntityCreator.UUID_EXAMPLE;
         assertThrows(ClientNotFoundException.class, () -> service.getClientById(id));
     }
-    @Test
-    void addNewClientTest() {
-    }
 
-    @Test
-    void deleteClientByIdTest() {
-    }
 }
